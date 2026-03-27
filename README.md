@@ -1,6 +1,16 @@
-# Meu Blog Ruby
+<div align="center">
+	<img src="public/icon.png" alt="Logo Meu Blog Ruby" width="96" />
+	<h1>Meu Blog Ruby</h1>
+	<p>Rede social estilo Instagram feita com Ruby on Rails.</p>
+</div>
 
-Rede social estilo Instagram feita com Ruby on Rails.
+## Prévia visual
+
+<div align="center">
+	<img src="public/icon.svg" alt="Identidade visual do projeto" width="120" />
+</div>
+
+> Observação: no repositório atual, as imagens disponíveis são os ícones do projeto. Quando você adicionar capturas de tela do feed, login e perfil, elas podem entrar aqui nesta seção.
 
 ## Stack
 
@@ -19,6 +29,14 @@ Rede social estilo Instagram feita com Ruby on Rails.
 - Criação de publicações com imagem
 - Página de perfil do usuário logado
 - Busca de posts
+
+## Telas do projeto
+
+- Login de usuários
+- Cadastro de usuários
+- Feed principal com visual moderno
+- Criação de post com imagem
+- Página Meu Perfil
 
 ## Rotas principais
 
