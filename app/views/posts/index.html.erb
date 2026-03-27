@@ -1,0 +1,100 @@
+<div style="background:
+  radial-gradient(1200px 700px at 10% 20%, rgba(37,99,235,0.22), transparent 60%),
+  radial-gradient(900px 600px at 90% 10%, rgba(124,58,237,0.18), transparent 58%),
+  radial-gradient(900px 650px at 50% 100%, rgba(34,211,238,0.14), transparent 62%),
+  linear-gradient(160deg, #020617 0%, #0b1224 45%, #111827 100%);
+  min-height:100vh; font-family:Inter, system-ui, -apple-system, sans-serif; padding-bottom:88px; position:relative; overflow:hidden;">
+
+  <div style="position:fixed; inset:0; pointer-events:none; z-index:0; background:
+    radial-gradient(600px 240px at 50% 0%, rgba(255,255,255,0.06), transparent 70%),
+    radial-gradient(500px 180px at 50% 100%, rgba(255,255,255,0.04), transparent 70%);"></div>
+
+  <div style="background:#111827; border-bottom:1px solid #1f2937; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; box-shadow:0 2px 12px rgba(2,6,23,0.45);">
+    <span style="color:#e2e8f0; font-size:22px; font-weight:800; letter-spacing:0.3px;">DevSocial</span>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <%= form_with url: posts_path, method: :get, local: true, style:"display:flex; gap:8px;" do |f| %>
+        <%= f.text_field :query, value: params[:query], placeholder: "Buscar no feed...",
+            style: "padding:9px 12px; background:#0f172a; border:1px solid #334155; border-radius:999px; color:#e2e8f0; font-size:13px; width:190px; outline:none;" %>
+      <% end %>
+      <%= link_to new_post_path, style:"color:#2563eb; font-size:24px; text-decoration:none;" do %>➕<% end %>
+    </div>
+  </div>
+
+  <div style="display:flex; overflow-x:auto; padding:20px 14px; gap:18px; border-bottom:1px solid #1f2937; background:rgba(15,23,42,0.55); backdrop-filter:blur(4px); scrollbar-width:none; position:relative; z-index:1;">
+    <% @posts.each do |post| %>
+      <div style="text-align:center; flex-shrink:0; cursor:pointer;">
+        <div style="width:70px; height:70px; border-radius:50%; background:linear-gradient(45deg,#2563eb,#7c3aed); padding:3px; box-shadow:0 6px 14px rgba(37,99,235,0.24);">
+          <div style="width:100%; height:100%; border-radius:50%; background:#ffffff; display:flex; align-items:center; justify-content:center; color:#2563eb; font-weight:700; font-size:22px;">
+            <%= post.user.email.first.upcase %>
+          </div>
+        </div>
+        <small style="color:#cbd5e1; font-size:11px; display:block; margin-top:6px; max-width:72px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+          <%= post.user.email.split("@").first %>
+        </small>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="max-width:520px; margin:0 auto; padding:8px 12px 0; position:relative; z-index:1;">
+    <% @posts.each do |post| %>
+      <div style="background:#ffffff; border-radius:16px; margin:18px 0; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 6px 20px rgba(15,23,42,0.06);">
+        <div style="display:flex; align-items:center; padding:14px; gap:10px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:linear-gradient(45deg,#2563eb,#7c3aed); display:flex; align-items:center; justify-content:center; font-weight:700; color:#ffffff; font-size:16px; flex-shrink:0;">
+            <%= post.user.email.first.upcase %>
+          </div>
+          <div>
+            <div style="color:#0f172a; font-weight:700; font-size:14px;"><%= post.user.email.split("@").first %></div>
+            <div style="color:#64748b; font-size:11px;"><%= post.created_at.strftime("%d/%m/%Y às %H:%M") %></div>
+          </div>
+          <% if post.user == current_user %>
+            <span style="margin-left:auto; color:#94a3b8; font-size:18px;">•••</span>
+          <% end %>
+        </div>
+
+        <% if post.image.attached? %>
+          <%= image_tag post.image, style:"width:100%; max-height:520px; object-fit:cover; display:block;" %>
+        <% else %>
+          <div style="width:100%; height:300px; background:linear-gradient(135deg,#dbeafe,#eff6ff); display:flex; align-items:center; justify-content:center; color:#93c5fd; font-size:48px;">
+            📷
+          </div>
+        <% end %>
+
+        <div style="padding:12px 14px 10px;">
+          <div style="font-size:24px; display:flex; gap:14px; margin-bottom:8px;">
+            <span style="cursor:pointer;">❤️</span>
+            <span style="cursor:pointer;">💬</span>
+            <span style="cursor:pointer;">📤</span>
+            <span style="margin-left:auto; cursor:pointer;">🔖</span>
+          </div>
+
+          <p style="color:#0f172a; font-size:14px; margin:6px 0 4px;">
+            <strong><%= post.user.email.split("@").first %></strong>
+            <span style="color:#334155;"><%= post.title %></span>
+          </p>
+          <p style="color:#64748b; font-size:13px; margin:0 0 8px;">
+            <%= truncate(post.description, length: 120) %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @posts.empty? %>
+      <div style="text-align:center; color:#475569; margin:56px auto 0; background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:28px 20px; max-width:420px; box-shadow:0 6px 20px rgba(15,23,42,0.05);">
+        <div style="font-size:44px;">✨</div>
+        <p style="margin:8px 0 0; color:#0f172a; font-weight:700;">Seu feed ainda está vazio</p>
+        <p style="margin:6px 0 16px;">Comece criando sua primeira publicação.</p>
+        <%= link_to "Criar publicação", new_post_path, style:"display:inline-block; background:#2563eb; color:#ffffff; text-decoration:none; padding:10px 16px; border-radius:10px; font-weight:700;" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="position:fixed; bottom:0; width:100%; background:#111827; border-top:1px solid #1f2937; display:flex; justify-content:space-around; align-items:center; padding:12px 0; z-index:10; box-shadow:0 -4px 16px rgba(2,6,23,0.45);">
+    <%= link_to posts_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Feed" do %>🏠<% end %>
+    <%= link_to new_post_path, style:"width:48px; height:48px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:24px; box-shadow:0 8px 18px rgba(37,99,235,0.45);", title:"Novo post" do %><span style="color:#2563eb;">➕</span><% end %>
+    <%= link_to profile_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Meu perfil" do %>👤<% end %>
+    <%= button_to "Sair", destroy_user_session_path, method: :delete,
+        style:"background:#ffffff; border:none; color:#ef4444; font-size:16px; font-weight:700; cursor:pointer; width:72px; height:44px; border-radius:999px; box-shadow:0 6px 14px rgba(15,23,42,0.28);",
+        form: { style: "margin:0;" },
+        title:"Sair" %>
+  </div>
+</div>

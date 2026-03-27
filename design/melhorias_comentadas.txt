@@ -1,0 +1,41 @@
+# ============================================
+# MELHORIAS DE DESIGN E AJUSTES DO PROJETO
+# ============================================
+
+# 1) TELA DE CADASTRO (DEVise)
+# - Foi customizada a tela de cadastro em app/views/users/registrations/new.html.erb.
+# - O layout foi centralizado em tela cheia para melhor foco visual.
+# - Foi usado um card escuro com destaque em ciano para contraste moderno.
+# - Campos de email/senha/confirmacao receberam estilo consistente.
+# - Botao principal de criar conta ganhou destaque visual.
+
+# 2) TELA DE LOGIN (DEVise)
+# - Foi customizada a tela de login em app/views/users/sessions/new.html.erb.
+# - O visual foi padronizado com a tela de cadastro.
+# - Campo de remember_me foi mantido e integrado ao novo layout.
+# - Botao de entrar segue o mesmo padrao de cores e identidade visual.
+
+# 3) CONFIGURACAO PARA USAR VIEWS CUSTOMIZADAS
+# - Em config/initializers/devise.rb foi habilitado:
+#   config.scoped_views = true
+# - Isso faz o Devise usar as views locais do projeto (app/views/users/*)
+#   em vez das views padrao da gem.
+
+# 4) CORRECOES DE ROTAS E AUTENTICACAO
+# - Logout foi ajustado para evitar erro de rota/method mismatch.
+# - Em config/initializers/devise.rb:
+#   config.sign_out_via = [:delete, :get]
+# - Em config/routes.rb:
+#   devise_for :users, sign_out_via: [:delete, :get]
+# - No layout, sign out usa button_to com method :delete
+#   para envio confiavel do metodo HTTP correto.
+
+# 5) POSTS E ESTRUTURA BASICA DA APLICACAO
+# - Migration de posts foi executada para criar a tabela.
+# - Rota resources :posts foi corrigida e estabilizada.
+# - Controller de posts teve erro de sintaxe corrigido (end faltando).
+
+# RESULTADO GERAL
+# - Fluxo de login/cadastro funcionando.
+# - Personalizacao visual aplicada nas telas principais de autenticacao.
+# - Rotas e migrations corrigidas para manter o sistema estavel.
