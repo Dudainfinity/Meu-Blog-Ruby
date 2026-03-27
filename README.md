@@ -16,7 +16,8 @@
 
 - Ruby 3.2+
 - Rails 8.1.3
-- SQLite
+- SQLite no desenvolvimento
+- PostgreSQL em produção
 - Devise
 - Active Storage
 - Turbo + Stimulus
@@ -105,3 +106,36 @@ Depois:
 Repositório GitHub:
 
 `https://github.com/Dudainfinity/Meu-Blog-Ruby`
+
+## Deploy no Render
+
+O projeto foi preparado para deploy no Render com:
+
+- PostgreSQL em produção
+- arquivo [render.yaml](render.yaml)
+- `DATABASE_URL` via banco gerenciado do Render
+
+### Como publicar
+
+1. Acesse o Render e conecte seu GitHub.
+2. Clique em `New` → `Blueprint`.
+3. Selecione o repositório `Meu-Blog-Ruby`.
+4. O Render vai ler o arquivo [render.yaml](render.yaml).
+5. Adicione a variável `RAILS_MASTER_KEY` com o valor da sua chave local.
+6. Confirme a criação do app e do banco.
+
+### Variáveis importantes
+
+- `RAILS_MASTER_KEY`
+- `SECRET_KEY_BASE` (gerada automaticamente no blueprint)
+- `DATABASE_URL` (vinculada automaticamente ao banco Render)
+
+### Observação sobre imagens
+
+Hoje o projeto usa Active Storage local. Em produção no Render, uploads locais podem não ser persistentes entre deploys e reinícios.
+
+Para produção real, o ideal é usar armazenamento externo como:
+
+- Cloudinary
+- Amazon S3
+- Supabase Storage
