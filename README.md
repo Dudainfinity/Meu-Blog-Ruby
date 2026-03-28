@@ -4,11 +4,8 @@
 	<p>Rede social estilo Instagram feita com Ruby on Rails.</p>
 </div>
 
-## Prévia visual
+Acesse o projeto: https://meu-blog-ruby.onrender.com/users/sign_in
 
-<div align="center">
-	<img src="public/icon.svg" alt="Identidade visual do projeto" width="120" />
-</div>
 
 > Observação: no repositório atual, as imagens disponíveis são os ícones do projeto. Quando você adicionar capturas de tela do feed, login e perfil, elas podem entrar aqui nesta seção.
 
