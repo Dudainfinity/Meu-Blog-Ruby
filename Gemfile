@@ -30,11 +30,6 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 # Authentication
 gem "devise", "~> 5.0"
 
-# Rails database-backed adapters
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
-
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
