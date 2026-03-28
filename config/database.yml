@@ -21,7 +21,15 @@ test:
   database: storage/test.sqlite3
 
 production:
+  <% production_database_url = ENV["DATABASE_URL"] || ENV["RENDER_DATABASE_URL"] || ENV["POSTGRES_INTERNAL_URL"] || ENV["POSTGRES_URL"] %>
+  <% if production_database_url.present? %>
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["DATABASE_URL"] || ENV["RENDER_DATABASE_URL"] || ENV["POSTGRES_INTERNAL_URL"] || ENV["POSTGRES_URL"] %>
+  url: <%= production_database_url %>
+  <% else %>
+  adapter: sqlite3
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: storage/production.sqlite3
+  <% end %>
