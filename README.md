@@ -11,6 +11,7 @@
 </div>
 
 > Observação: no repositório atual, as imagens disponíveis são os ícones do projeto. Quando você adicionar capturas de tela do feed, login e perfil, elas podem entrar aqui nesta seção.
+<img width="1835" height="915" alt="Captura de tela de 2026-03-27 20-13-04" src="https://github.com/user-attachments/assets/9add8746-f26c-4047-9dc6-c96b7ffdd1a3" />
 
 ## Stack
 
