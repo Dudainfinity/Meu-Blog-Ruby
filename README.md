@@ -1,141 +1,143 @@
 <div align="center">
-	<img src="public/icon.png" alt="Logo Meu Blog Ruby" width="96" />
-	<h1>Meu Blog Ruby</h1>
-	<p>Rede social estilo Instagram feita com Ruby on Rails.</p>
+  <img src="public/icon.png" alt="Meu Blog Ruby" width="88" />
+  <h1>Meu Blog Ruby</h1>
+  <p><strong>Rede social no estilo Instagram construída com Ruby on Rails 8.</strong></p>
+  <p>Feed de publicações com imagens, autenticação de usuários, perfil e busca.</p>
 </div>
 
-## Prévia visual
+---
+
+## Visão geral
+
+Aplicação web onde usuários se cadastram, fazem login e publicam posts com imagem,
+título e legenda. O feed exibe as publicações em ordem cronológica, em uma interface
+escura inspirada em redes sociais modernas. As imagens são anexadas via Active Storage
+e a autenticação é gerenciada pelo Devise.
 
 <div align="center">
-	<img src="public/icon.svg" alt="Identidade visual do projeto" width="120" />
+  <img src="docs/feed.png" alt="Feed de publicações" width="320" />
 </div>
 
-> Observação: no repositório atual, as imagens disponíveis são os ícones do projeto. Quando você adicionar capturas de tela do feed, login e perfil, elas podem entrar aqui nesta seção.
+## Telas
 
-## Stack
-
-- Ruby 3.2+
-- Rails 8.1.3
-- SQLite no desenvolvimento
-- PostgreSQL em produção
-- Devise
-- Active Storage
-- Turbo + Stimulus
+<table>
+  <tr>
+    <td width="50%" valign="top" align="center">
+      <strong>Login</strong><br/><br/>
+      <img src="docs/login.png" alt="Tela de login" />
+    </td>
+    <td width="50%" valign="top" align="center">
+      <strong>Nova publicação</strong><br/><br/>
+      <img src="docs/novo-post.png" alt="Formulário de nova publicação" />
+    </td>
+  </tr>
+</table>
 
 ## Funcionalidades
 
-- Cadastro e login de usuários
-- Logout com Devise
-- Feed de posts com visual moderno
-- Criação de publicações com imagem
-- Página de perfil do usuário logado
-- Busca de posts
+- Cadastro, login e logout de usuários com Devise
+- Publicação de posts com imagem (upload via Active Storage), título e legenda
+- Feed cronológico com as publicações de todos os usuários
+- Página de perfil exibindo os posts do usuário logado
+- Busca de posts por título
+- Autenticação obrigatória nas páginas internas
 
-## Telas do projeto
+## Stack
 
-- Login de usuários
-- Cadastro de usuários
-- Feed principal com visual moderno
-- Criação de post com imagem
-- Página Meu Perfil
+| Camada             | Tecnologia                            |
+|--------------------|---------------------------------------|
+| Linguagem          | Ruby 3.2                              |
+| Framework          | Ruby on Rails 8.1                     |
+| Autenticação       | Devise                                |
+| Upload de arquivos | Active Storage + image_processing     |
+| Front-end          | Hotwire (Turbo + Stimulus), Propshaft |
+| Banco (dev)        | SQLite                                |
+| Banco (produção)   | PostgreSQL                            |
+| Deploy             | Render (Blueprint) / Docker + Kamal   |
+
+## Modelo de dados
+
+**User** (Devise) `has_many :posts`
+
+**Post** `belongs_to :user`, `has_one_attached :image`
+
+| Campo         | Tipo   | Observação            |
+|---------------|--------|-----------------------|
+| `title`       | string | Obrigatório           |
+| `description` | text   | Obrigatório (legenda) |
+| `image`       | anexo  | Active Storage        |
+| `user_id`     | ref    | Autor da publicação   |
 
 ## Rotas principais
 
-- `/users/sign_in` — login
-- `/users/sign_up` — cadastro
-- `/posts` — feed principal
-- `/posts/new` — nova publicação
-- `/meu_perfil` — perfil do usuário logado
+| Rota             | Descrição                |
+|------------------|--------------------------|
+| `/`              | Feed principal           |
+| `/users/sign_in` | Login                    |
+| `/users/sign_up` | Cadastro                 |
+| `/posts`         | Listagem de posts        |
+| `/posts/new`     | Nova publicação          |
+| `/meu_perfil`    | Perfil do usuário logado |
 
-## Como rodar o projeto
+## Como rodar localmente
 
-1. Clone o repositório:
+Pré-requisitos: Ruby 3.2+ e Bundler.
 
-	`git clone https://github.com/Dudainfinity/Meu-Blog-Ruby.git`
+```bash
+# 1. Clone o repositório
+git clone https://github.com/Dudainfinity/Meu-Blog-Ruby.git
+cd Meu-Blog-Ruby
 
-2. Entre na pasta:
+# 2. Instale as dependências
+bundle install
 
-	`cd Meu-Blog-Ruby`
+# 3. Crie e migre o banco de dados
+bin/rails db:prepare
 
-3. Instale as gems:
+# 4. Suba o servidor
+bin/rails server
+```
 
-	`bundle install`
+Acesse `http://localhost:3000`, crie sua conta e comece a publicar.
 
-4. Crie e migre o banco:
-
-	`bin/rails db:create db:migrate`
-
-5. Inicie o servidor:
-
-	`bin/rails server`
-
-6. Acesse no navegador:
-
-	`http://localhost:3000`
-
-## Upload de imagens
-
-O projeto usa Active Storage para anexar imagens aos posts.
-
-Se necessário, rode novamente:
-
-`bin/rails active_storage:install`
-
-Depois:
-
-`bin/rails db:migrate`
-
-## Estrutura principal
-
-- [app/controllers/posts_controller.rb](app/controllers/posts_controller.rb)
-- [app/controllers/profiles_controller.rb](app/controllers/profiles_controller.rb)
-- [app/models/post.rb](app/models/post.rb)
-- [app/models/user.rb](app/models/user.rb)
-- [app/views/posts/index.html.erb](app/views/posts/index.html.erb)
-- [app/views/posts/new.html.erb](app/views/posts/new.html.erb)
-- [app/views/profiles/show.html.erb](app/views/profiles/show.html.erb)
-
-## Observações
-
-- O redirecionamento após login leva o usuário para `/posts`.
-- O projeto está configurado para autenticação obrigatória nas páginas internas.
-- O banco usado em desenvolvimento é SQLite.
-
-## Publicação
-
-Repositório GitHub:
-
-`https://github.com/Dudainfinity/Meu-Blog-Ruby`
+> O upload de imagens usa Active Storage. Para gerar variantes/redimensionamento em
+> produção, é necessário ter o libvips ou o ImageMagick instalados no ambiente.
 
 ## Deploy no Render
 
-O projeto foi preparado para deploy no Render com:
+O projeto já vem preparado para deploy no Render via Blueprint (`render.yaml`), com
+PostgreSQL gerenciado em produção.
 
-- PostgreSQL em produção
-- arquivo [render.yaml](render.yaml)
-- `DATABASE_URL` via banco gerenciado do Render
+1. Conecte seu GitHub ao Render.
+2. Escolha `New` e em seguida `Blueprint`.
+3. Selecione o repositório `Meu-Blog-Ruby` (o Render lê o `render.yaml`).
+4. Defina a variável `RAILS_MASTER_KEY` com o valor da sua chave local (`config/master.key`).
+5. Confirme a criação do serviço web e do banco.
 
-### Como publicar
+Variáveis relevantes: `RAILS_MASTER_KEY`, `SECRET_KEY_BASE` (gerada pelo blueprint) e
+`DATABASE_URL` (vinculada automaticamente ao banco do Render).
 
-1. Acesse o Render e conecte seu GitHub.
-2. Clique em `New` → `Blueprint`.
-3. Selecione o repositório `Meu-Blog-Ruby`.
-4. O Render vai ler o arquivo [render.yaml](render.yaml).
-5. Adicione a variável `RAILS_MASTER_KEY` com o valor da sua chave local.
-6. Confirme a criação do app e do banco.
+Observação sobre imagens em produção: o Active Storage local não persiste uploads entre
+deploys e reinícios. Para produção real, recomenda-se um armazenamento externo como
+Amazon S3, Cloudinary ou Supabase Storage.
 
-### Variáveis importantes
+## Estrutura principal
 
-- `RAILS_MASTER_KEY`
-- `SECRET_KEY_BASE` (gerada automaticamente no blueprint)
-- `DATABASE_URL` (vinculada automaticamente ao banco Render)
+```
+app/
+├── controllers/
+│   ├── posts_controller.rb       # Feed, criação e busca de posts
+│   ├── profiles_controller.rb    # Perfil do usuário logado
+│   └── page_controller.rb        # Página inicial (feed)
+├── models/
+│   ├── post.rb                   # belongs_to :user, has_one_attached :image
+│   └── user.rb                   # Devise + has_many :posts
+└── views/
+    ├── page/index.html.erb       # Feed principal
+    ├── posts/                    # Listagem e nova publicação
+    └── profiles/show.html.erb    # Perfil
+```
 
-### Observação sobre imagens
+---
 
-Hoje o projeto usa Active Storage local. Em produção no Render, uploads locais podem não ser persistentes entre deploys e reinícios.
-
-Para produção real, o ideal é usar armazenamento externo como:
-
-- Cloudinary
-- Amazon S3
-- Supabase Storage
+Desenvolvido por [Dudainfinity](https://github.com/Dudainfinity).
