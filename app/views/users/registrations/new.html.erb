@@ -20,7 +20,7 @@
     </h2>
 
     <p style="text-align:center; color:var(--text-muted); margin-bottom:30px;">
-      Entre para o mundo dos devs 💻
+      Entre para o mundo dos devs
     </p>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -97,7 +97,7 @@
 
     <span style="color:#22c55e;">if</span> valid?(email, password)
       create_account
-      puts <span style="color:#facc15;">"Conta criada com sucesso 🚀"</span>
+      puts <span style="color:#facc15;">"Conta criada com sucesso "</span>
     <span style="color:#22c55e;">else</span>
       puts <span style="color:#ef4444;">"Erro ao criar conta"</span>
     <span style="color:#22c55e;">end</span>
@@ -112,7 +112,7 @@
 <pre>
 <span style="color:#22c55e;">def</span> welcome_message(user)
   puts <span style="color:#facc15;">"Olá, #{user.name}!"</span>
-  puts <span style="color:#facc15;">"Seu blog está pronto ✨"</span>
+  puts <span style="color:#facc15;">"Seu blog está pronto "</span>
 
   <span style="color:#22c55e;">return</span> <span style="color:#facc15;">:success</span>
 <span style="color:#22c55e;">end</span>

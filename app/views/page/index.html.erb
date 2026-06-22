@@ -2,7 +2,7 @@
 
   <!--  STORIES -->
   <div style="display:flex; overflow-x:auto; padding:15px; border-bottom:1px solid #1f2937;">
-    
+
     <% @posts.each do |post| %>
       <div style="text-align:center; margin-right:15px;">
         <div style="width:60px; height:60px; border-radius:50%; background:linear-gradient(45deg,#22d3ee,#9333ea); padding:2px;">
@@ -61,17 +61,17 @@
 
   <!--  NAVBAR (tipo Instagram) -->
   <div style="position:fixed; bottom:0; width:100%; background:#111827; display:flex; justify-content:space-around; padding:15px; border-top:1px solid #1f2937;">
-    
+
     <%= link_to posts_path, style:"color:white; text-decoration:none;" do %>
-      🏠
+
     <% end %>
 
     <%= link_to new_post_path, style:"color:#22d3ee; text-decoration:none;" do %>
-      
+
     <% end %>
 
     <%= link_to "#", style:"color:white;" do %>
-      
+
     <% end %>
 
   </div>

@@ -16,7 +16,7 @@
         <%= f.text_field :query, value: params[:query], placeholder: "Buscar no feed...",
             style: "padding:9px 12px; background:#0f172a; border:1px solid #334155; border-radius:999px; color:#e2e8f0; font-size:13px; width:190px; outline:none;" %>
       <% end %>
-      <%= link_to new_post_path, style:"color:#2563eb; font-size:24px; text-decoration:none;" do %>➕<% end %>
+      <%= link_to new_post_path, style:"color:#2563eb; font-size:24px; text-decoration:none;" do %><% end %>
     </div>
   </div>
 
@@ -55,16 +55,16 @@
           <%= image_tag post.image, style:"width:100%; max-height:520px; object-fit:cover; display:block;" %>
         <% else %>
           <div style="width:100%; height:300px; background:linear-gradient(135deg,#dbeafe,#eff6ff); display:flex; align-items:center; justify-content:center; color:#93c5fd; font-size:48px;">
-            📷
+
           </div>
         <% end %>
 
         <div style="padding:12px 14px 10px;">
           <div style="font-size:24px; display:flex; gap:14px; margin-bottom:8px;">
-            <span style="cursor:pointer;">❤️</span>
-            <span style="cursor:pointer;">💬</span>
-            <span style="cursor:pointer;">📤</span>
-            <span style="margin-left:auto; cursor:pointer;">🔖</span>
+            <span style="cursor:pointer;"></span>
+            <span style="cursor:pointer;"></span>
+            <span style="cursor:pointer;"></span>
+            <span style="margin-left:auto; cursor:pointer;"></span>
           </div>
 
           <p style="color:#0f172a; font-size:14px; margin:6px 0 4px;">
@@ -80,7 +80,7 @@
 
     <% if @posts.empty? %>
       <div style="text-align:center; color:#475569; margin:56px auto 0; background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:28px 20px; max-width:420px; box-shadow:0 6px 20px rgba(15,23,42,0.05);">
-        <div style="font-size:44px;">✨</div>
+        <div style="font-size:44px;"></div>
         <p style="margin:8px 0 0; color:#0f172a; font-weight:700;">Seu feed ainda está vazio</p>
         <p style="margin:6px 0 16px;">Comece criando sua primeira publicação.</p>
         <%= link_to "Criar publicação", new_post_path, style:"display:inline-block; background:#2563eb; color:#ffffff; text-decoration:none; padding:10px 16px; border-radius:10px; font-weight:700;" %>
@@ -89,9 +89,9 @@
   </div>
 
   <div style="position:fixed; bottom:0; width:100%; background:#111827; border-top:1px solid #1f2937; display:flex; justify-content:space-around; align-items:center; padding:12px 0; z-index:10; box-shadow:0 -4px 16px rgba(2,6,23,0.45);">
-    <%= link_to posts_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Feed" do %>🏠<% end %>
-    <%= link_to new_post_path, style:"width:48px; height:48px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:24px; box-shadow:0 8px 18px rgba(37,99,235,0.45);", title:"Novo post" do %><span style="color:#2563eb;">➕</span><% end %>
-    <%= link_to profile_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Meu perfil" do %>👤<% end %>
+    <%= link_to posts_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Feed" do %><% end %>
+    <%= link_to new_post_path, style:"width:48px; height:48px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:24px; box-shadow:0 8px 18px rgba(37,99,235,0.45);", title:"Novo post" do %><span style="color:#2563eb;"></span><% end %>
+    <%= link_to profile_path, style:"width:44px; height:44px; border-radius:999px; background:#ffffff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; box-shadow:0 6px 14px rgba(15,23,42,0.28);", title:"Meu perfil" do %><% end %>
     <%= button_to "Sair", destroy_user_session_path, method: :delete,
         style:"background:#ffffff; border:none; color:#ef4444; font-size:16px; font-weight:700; cursor:pointer; width:72px; height:44px; border-radius:999px; box-shadow:0 6px 14px rgba(15,23,42,0.28);",
         form: { style: "margin:0;" },
