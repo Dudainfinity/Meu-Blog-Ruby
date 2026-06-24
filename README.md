@@ -1,9 +1,4 @@
-<div align="center">
-  <img src="public/icon.png" alt="Meu Blog Ruby" width="88" />
-  <h1>Meu Blog Ruby</h1>
-  <p><strong>Rede social no estilo Instagram construída com Ruby on Rails 8.</strong></p>
-  <p>Feed de publicações com imagens, autenticação de usuários, perfil e busca.</p>
-</div>
+
 
 ---
 
